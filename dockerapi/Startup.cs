@@ -26,6 +26,8 @@ namespace dockerapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //register swagger generator
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +39,12 @@ namespace dockerapi
             }
 
             app.UseHttpsRedirection();
+
+             //middleware serves swagger spec as JSON endpoint
+            app.UseSwagger();
+
+            //middleware adds swagger ui
+            app.UseSwaggerUI();
 
             app.UseRouting();
 
